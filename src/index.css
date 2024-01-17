@@ -1,0 +1,30 @@
+:root {
+  font-family: "Space Mono", sans-serif;
+  line-height: 2.5rem;
+  font-weight: 400;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 1.3rem;
+  display: grid;
+  place-content: center;
+  height: 100vh;
+}
+
+.wrapper {
+  width: 37.5rem;
+  background-color: bisque;
+}
