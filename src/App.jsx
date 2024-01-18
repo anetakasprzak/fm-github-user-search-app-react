@@ -22,10 +22,13 @@ export default function App() {
 
       <section className="user__section">
         <div className="user__details">
-          <img className="user__avatar" src="" alt="user avatar" />
-          <p className="user__name">User Name</p>
-          <p className="user__link">@octocat</p>
-          <p className="user__joined">Joined date</p>
+          {/* <img className="user__avatar" src="" alt="user avatar" /> */}
+          <div className="user__avatar">AVATAR</div>
+          <div className="user__text-box">
+            <p className="user__name">User Name</p>
+            <p className="user__link">@octocat</p>
+            <p className="user__joined">Joined date</p>
+          </div>
           <p className="user__text">
             Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec
             odio. Quisque volutpat mattis eros.
