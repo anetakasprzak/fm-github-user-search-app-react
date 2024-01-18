@@ -27,7 +27,7 @@ body {
 
 .wrapper {
   width: 37.5rem;
-  background: #f6f8ff;
+  background-color: #f6f8ff;
   padding: 3.3rem 2.4rem 4.7rem 2.4rem;
 }
 
@@ -75,7 +75,9 @@ body {
 
 .input__icon {
   position: absolute;
-  top: 30%;
+  width: 2rem;
+  height: 2rem;
+  top: 34%;
   right: 89%;
 }
 
@@ -123,8 +125,7 @@ body {
 }
 
 .user__text-box {
-  display: flex;
-  flex-direction: column;
+  display: grid;
 }
 
 .user__name {
@@ -182,4 +183,197 @@ body {
 .socials__icon {
   width: 1.8rem;
   height: 2.1rem;
+}
+
+/**************************************/
+/******************* TABLET *******************/
+/**************************************/
+
+@media screen and (min-width: 48em) {
+  body {
+    font-size: 1.5rem;
+  }
+
+  .wrapper {
+    width: 76.8rem;
+    padding: 14rem 9.8rem 23rem 9.7rem;
+  }
+
+  .input__box {
+    margin-bottom: 2.4rem;
+  }
+
+  .input__search {
+    width: 100%;
+    padding: 2.2rem 9rem 2.2rem 8rem;
+  }
+
+  .input__icon {
+    width: 2.4rem;
+    height: 2.4rem;
+    top: 33%;
+    right: 90%;
+  }
+
+  .input__btn {
+    top: 14%;
+    right: 3%;
+    width: 10.6rem;
+    height: 5rem;
+    font-size: 1.6rem;
+  }
+
+  .user__section {
+    gap: 3.2rem;
+    padding: 4rem 4rem 4rem 4rem;
+  }
+
+  .user__details {
+    column-gap: 4.1rem;
+    row-gap: 2.4rem;
+
+    grid-template-columns: min-content 1fr;
+    grid-template-rows: 1fr max-content;
+  }
+
+  .user__avatar {
+    height: 11.7rem;
+    width: 11.7rem;
+    border-radius: 11.7rem;
+  }
+
+  .user__text-box {
+    align-self: center;
+  }
+
+  .user__name {
+    font-size: 2.6rem;
+  }
+
+  .user__link {
+    font-size: 1.6rem;
+  }
+
+  .user__text {
+    grid-column: 1 / -1;
+  }
+
+  .follow__section {
+    padding: 1.6rem;
+  }
+
+  .follow__title {
+    font-size: 1.3rem;
+  }
+
+  .follow__number {
+    font-size: 2.2rem;
+  }
+
+  .socials__section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 1.9rem;
+  }
+
+  .socials__box {
+    gap: 1.6rem;
+  }
+
+  .socials__icon {
+    width: 1.8rem;
+    height: 2.1rem;
+  }
+
+  .link--twitter {
+    grid-column: 2 / -1;
+    grid-row: 1 / 2;
+  }
+}
+
+/**************************************/
+/******************* DESKTOP *******************/
+/**************************************/
+
+@media screen and (min-width: 90em) {
+  .wrapper {
+    width: 144rem;
+    padding: 14.4rem 35.5rem 17rem 35.5rem;
+  }
+
+  .theme__box {
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .theme__box:hover {
+    color: #222731;
+  }
+
+  .theme__box img {
+    color: #222731;
+  }
+
+  .input__icon {
+    top: 33%;
+    right: 92%;
+  }
+
+  .input__search {
+    cursor: pointer;
+  }
+
+  .input__btn {
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .input__btn:hover {
+    background-color: #60abff;
+  }
+
+  .user__section {
+    padding: 4.8rem 4.8rem 4.8rem 4.8rem;
+  }
+
+  .user__details {
+    display: grid;
+    column-gap: 3.7rem;
+    row-gap: 3.3rem;
+  }
+
+  .user__avatar {
+    grid-row: 1 / -1;
+  }
+
+  .user__text-box {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .user__joined {
+    grid-column: 2 /3;
+    grid-row: 1 /2;
+    place-self: end;
+  }
+
+  .user__text {
+    grid-column: 2 / -1;
+  }
+
+  .follow__section {
+    margin-left: 15rem;
+  }
+
+  .socials__section {
+    margin-left: 15rem;
+  }
+
+  .link--github {
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .link--github:hover {
+    text-decoration: underline;
+  }
 }

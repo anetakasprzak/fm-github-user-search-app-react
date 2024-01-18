@@ -1,4 +1,4 @@
-/* devfinder Light Dark       */
+/*  Light Dark       */
 export default function App() {
   return (
     <div className="wrapper">
@@ -66,16 +66,16 @@ export default function App() {
               src="../public/assets/icon-website.svg"
               alt="icon"
             />
-            <p className="socials__link">https://github.blog</p>
+            <p className="socials__link link--github">https://github.blog</p>
           </div>
 
-          <div className="socials__box">
+          <div className="socials__box link--twitter">
             <img
               className="socials__icon"
               src="../public/assets/icon-twitter.svg"
               alt="icon"
             />
-            <p className="socials__link">Twitter</p>
+            <p className="socials__link link--twitter">Twitter</p>
           </div>
 
           <div className="socials__box">
