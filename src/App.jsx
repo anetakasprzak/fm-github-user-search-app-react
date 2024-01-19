@@ -1,12 +1,94 @@
-/*  Light Dark       */
+import { useEffect, useState } from "react";
+
+const user = {
+  login: "octocat",
+  id: 583231,
+  node_id: "MDQ6VXNlcjU4MzIzMQ==",
+  avatar_url: "https://avatars.githubusercontent.com/u/583231?v=4",
+  gravatar_id: "",
+  url: "https://api.github.com/users/octocat",
+  html_url: "https://github.com/octocat",
+  followers_url: "https://api.github.com/users/octocat/followers",
+  following_url: "https://api.github.com/users/octocat/following{/other_user}",
+  gists_url: "https://api.github.com/users/octocat/gists{/gist_id}",
+  starred_url: "https://api.github.com/users/octocat/starred{/owner}{/repo}",
+  subscriptions_url: "https://api.github.com/users/octocat/subscriptions",
+  organizations_url: "https://api.github.com/users/octocat/orgs",
+  repos_url: "https://api.github.com/users/octocat/repos",
+  events_url: "https://api.github.com/users/octocat/events{/privacy}",
+  received_events_url: "https://api.github.com/users/octocat/received_events",
+  type: "User",
+  site_admin: false,
+  name: "The Octocat",
+  company: "@github",
+  blog: "https://github.blog",
+  location: "San Francisco",
+  email: null,
+  hireable: null,
+  bio: null,
+  twitter_username: null,
+  public_repos: 8,
+  public_gists: 8,
+  followers: 11943,
+  following: 9,
+  created_at: "2011-01-25T18:44:36Z",
+  updated_at: "2023-12-22T12:29:36Z",
+};
+
 export default function App() {
+  const [query, setQuery] = useState("iuliancarnaru");
+  // const [user, setUser] = useState({});
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(
+    function () {
+      async function fetchUser() {
+        try {
+          setIsLoading(true);
+          const res = await fetch(`https://api.github.com/users/${query}`);
+          const data = await res.json();
+          setUser(data);
+        } catch (err) {
+          console.error(err);
+        } finally {
+          setIsLoading(false);
+        }
+      }
+      if (query.length < 3) {
+        return;
+      }
+      // fetchUser();
+    },
+    [query]
+  );
+
+  function formatDate(dateFromApi) {
+    const date = new Date(dateFromApi);
+    const formattedDate = date.toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    });
+    return formattedDate;
+  }
+
   return (
     <div className="wrapper">
       <div className="logo__box">
         <p className="logo">devfinder</p>
         <div className="theme__box">
           <p className="theme">Dark</p>
-          <img src="../public/assets/icon-moon.svg" />
+          <div className="theme_icon">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M19.5133 11.3967C19.3087 11.3453 19.1041 11.3966 18.9251 11.5251C18.2602 12.0901 17.4929 12.5523 16.649 12.8605C15.8562 13.1687 14.9866 13.3228 14.066 13.3228C11.9944 13.3228 10.1019 12.4753 8.74647 11.1142C7.39102 9.75303 6.54707 7.85258 6.54707 5.77237C6.54707 4.89919 6.70051 4.0517 6.95626 3.28125C7.23758 2.45944 7.64677 1.71467 8.18383 1.07263C8.414 0.790132 8.36285 0.379226 8.08153 0.148091C7.90251 0.0196826 7.69792 -0.0316807 7.49332 0.0196826C5.31949 0.61036 3.42698 1.92012 2.07153 3.66648C0.767234 5.38715 0 7.51872 0 9.83007C0 12.6294 1.12528 15.1719 2.96664 17.0209C4.808 18.87 7.3143 20 10.1275 20C12.4803 20 14.6542 19.1782 16.3932 17.8171C18.1579 16.4303 19.4366 14.4528 19.9737 12.1928C20.076 11.8332 19.8714 11.4737 19.5133 11.3967Z" />
+            </svg>
+          </div>
         </div>
       </div>
 
@@ -16,78 +98,108 @@ export default function App() {
           className="input__search"
           type="text"
           placeholder="Search GitHub username..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
         />
         <button className="input__btn">Search</button>
       </section>
 
-      <section className="user__section">
-        <div className="user__details">
-          {/* <img className="user__avatar" src="" alt="user avatar" /> */}
-          <div className="user__avatar">AVATAR</div>
-          <div className="user__text-box">
-            <p className="user__name">User Name</p>
-            <p className="user__link">@octocat</p>
-            <p className="user__joined">Joined date</p>
-          </div>
-          <p className="user__text">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec
-            odio. Quisque volutpat mattis eros.
-          </p>
-        </div>
-
-        <div className="follow__section">
-          <div className="follow__box">
-            <p className="follow__title">Repos</p>
-            <span className="follow__number">8</span>
-          </div>
-          <div className="follow__box">
-            <p className="follow__title">Followers</p>
-            <span className="follow__number">3938</span>
-          </div>
-          <div className="follow__box">
-            <p className="follow__title">Following</p>
-            <span className="follow__number">9</span>
-          </div>
-        </div>
-
-        <div className="socials__section">
-          <div className="socials__box">
+      {isLoading && <Loader />}
+      {!isLoading && user && (
+        <section className="user__section">
+          <div className="user__details">
             <img
-              className="socials__icon"
-              src="../public/assets/icon-location.svg"
-              alt="icon"
+              className="user__avatar"
+              src={user.avatar_url}
+              alt="user avatar"
             />
-            <p className="socials__link">San Francisco</p>
+
+            <div className="user__text-box">
+              <p className="user__name">{user.name}</p>
+              <p className="user__link">@{user.login}</p>
+              <p className="user__joined">
+                Joined {formatDate(user.created_at)}
+              </p>
+            </div>
+            <p className="user__text">{user.bio}</p>
           </div>
 
-          <div className="socials__box">
-            <img
-              className="socials__icon"
-              src="../public/assets/icon-website.svg"
-              alt="icon"
-            />
-            <p className="socials__link link--github">https://github.blog</p>
+          <div className="follow__section">
+            <div className="follow__box">
+              <p className="follow__title">Repos</p>
+              <span className="follow__number">{user.public_repos}</span>
+            </div>
+            <div className="follow__box">
+              <p className="follow__title">Followers</p>
+              <span className="follow__number">{user.followers}</span>
+            </div>
+            <div className="follow__box">
+              <p className="follow__title">Following</p>
+              <span className="follow__number">{user.following}</span>
+            </div>
           </div>
 
-          <div className="socials__box link--twitter">
-            <img
-              className="socials__icon"
-              src="../public/assets/icon-twitter.svg"
-              alt="icon"
-            />
-            <p className="socials__link link--twitter">Twitter</p>
-          </div>
+          <div className="socials__section">
+            <div className="socials__box">
+              <img
+                className="socials__icon"
+                src="../public/assets/icon-location.svg"
+                alt="icon"
+              />
+              {!user.location ? (
+                <p style={{ opacity: 0.5 }}>Not available</p>
+              ) : (
+                <p className="socials__link">{user.location}</p>
+              )}
+            </div>
 
-          <div className="socials__box">
-            <img
-              className="socials__icon"
-              src="../public/assets/icon-company.svg"
-              alt="icon"
-            />
-            <p className="socials__link">@github</p>
+            <div className="socials__box">
+              <img
+                className="socials__icon"
+                src="../public/assets/icon-website.svg"
+                alt="icon"
+              />
+              {!user.blog ? (
+                <p style={{ opacity: 0.5 }}>Not available</p>
+              ) : (
+                <p className="socials__link link--github">{user.blog}</p>
+              )}
+            </div>
+
+            <div className="socials__box link--twitter">
+              <img
+                className="socials__icon"
+                src="../public/assets/icon-twitter.svg"
+                alt="icon"
+              />
+              {!user.twitter_username ? (
+                <p style={{ opacity: 0.5 }}>Not available</p>
+              ) : (
+                <p className="socials__link link--twitter">
+                  {user.twitter_username}
+                </p>
+              )}
+            </div>
+
+            <div className="socials__box">
+              <img
+                className="socials__icon"
+                src="../public/assets/icon-company.svg"
+                alt="icon"
+              />
+              {!user.company ? (
+                <p style={{ opacity: 0.5 }}>Not available</p>
+              ) : (
+                <p className="socials__link">{user.company}</p>
+              )}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   );
+}
+
+function Loader() {
+  return <p className="loader">Loading . . .</p>;
 }

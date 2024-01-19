@@ -50,6 +50,10 @@ body {
   gap: 1.5rem;
 }
 
+:is(.theme_icon) svg {
+  fill: #697c9a;
+}
+
 .theme {
   text-transform: uppercase;
   letter-spacing: 2.5px;
@@ -306,12 +310,21 @@ body {
     transition: all 0.2s;
   }
 
+  .theme_icon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  :is(.theme_icon) svg {
+    fill: #697c9a;
+  }
+
   .theme__box:hover {
     color: #222731;
   }
 
-  .theme__box img {
-    color: #222731;
+  .theme__box:hover .theme_icon svg {
+    fill: #222731;
   }
 
   .input__icon {
