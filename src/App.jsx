@@ -1,56 +1,23 @@
 import { useEffect, useState } from "react";
 
-const user = {
-  login: "octocat",
-  id: 583231,
-  node_id: "MDQ6VXNlcjU4MzIzMQ==",
-  avatar_url: "https://avatars.githubusercontent.com/u/583231?v=4",
-  gravatar_id: "",
-  url: "https://api.github.com/users/octocat",
-  html_url: "https://github.com/octocat",
-  followers_url: "https://api.github.com/users/octocat/followers",
-  following_url: "https://api.github.com/users/octocat/following{/other_user}",
-  gists_url: "https://api.github.com/users/octocat/gists{/gist_id}",
-  starred_url: "https://api.github.com/users/octocat/starred{/owner}{/repo}",
-  subscriptions_url: "https://api.github.com/users/octocat/subscriptions",
-  organizations_url: "https://api.github.com/users/octocat/orgs",
-  repos_url: "https://api.github.com/users/octocat/repos",
-  events_url: "https://api.github.com/users/octocat/events{/privacy}",
-  received_events_url: "https://api.github.com/users/octocat/received_events",
-  type: "User",
-  site_admin: false,
-  name: "The Octocat",
-  company: "@github",
-  blog: "https://github.blog",
-  location: "San Francisco",
-  email: null,
-  hireable: null,
-  bio: null,
-  twitter_username: null,
-  public_repos: 8,
-  public_gists: 8,
-  followers: 11943,
-  following: 9,
-  created_at: "2011-01-25T18:44:36Z",
-  updated_at: "2023-12-22T12:29:36Z",
-};
-
 export default function App() {
-  const [query, setQuery] = useState("iuliancarnaru");
-  // const [user, setUser] = useState({});
+  const [query, setQuery] = useState("");
+  const [user, setUser] = useState({});
 
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(
     function () {
       async function fetchUser() {
         try {
+          setError(false);
           setIsLoading(true);
           const res = await fetch(`https://api.github.com/users/${query}`);
           const data = await res.json();
           setUser(data);
         } catch (err) {
-          console.error(err);
+          setError(true);
         } finally {
           setIsLoading(false);
         }
@@ -58,7 +25,7 @@ export default function App() {
       if (query.length < 3) {
         return;
       }
-      // fetchUser();
+      fetchUser();
     },
     [query]
   );
@@ -105,7 +72,8 @@ export default function App() {
       </section>
 
       {isLoading && <Loader />}
-      {!isLoading && user && (
+      {error && <Error />}
+      {!isLoading && !error && user && (
         <section className="user__section">
           <div className="user__details">
             <img
@@ -202,4 +170,8 @@ export default function App() {
 
 function Loader() {
   return <p className="loader">Loading . . .</p>;
+}
+
+function Error() {
+  return <p className="error">Upps, there was a problem fetching data..</p>;
 }
