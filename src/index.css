@@ -2,7 +2,26 @@
   font-family: "Space Mono", sans-serif;
   line-height: 2.5rem;
   font-weight: 400;
-  color: #4b6a9b;
+
+  --color-light-grey: #697c9a;
+  --color-dark-grey: #2b3442;
+
+  --primary: #2b3442;
+
+  --background: #f6f8ff;
+  --text: #4b6a9b;
+  --section: #fefefe;
+  --button: #0079ff;
+}
+
+[data-theme="dark"] {
+  --color-dark-blue: #141d2f;
+
+  --primary: #fff;
+  --background: #141d2f;
+  --text: #ffffff;
+  --section: #1e2a47;
+  --button: #0079ff;
 }
 
 *,
@@ -27,8 +46,9 @@ body {
 
 .wrapper {
   width: 37.5rem;
-  background-color: #f6f8ff;
   padding: 3.3rem 2.4rem 4.7rem 2.4rem;
+  background-color: var(--background);
+  color: var(--text);
 }
 
 .logo__box {
@@ -39,7 +59,7 @@ body {
 }
 
 .logo {
-  color: #222731;
+  color: var(--primary);
   font-size: 2.6rem;
   font-weight: 700;
 }
@@ -48,16 +68,18 @@ body {
   display: flex;
   align-items: center;
   gap: 1.5rem;
+  color: var(--text);
 }
 
 :is(.theme_icon) svg {
-  fill: #697c9a;
+  fill: var(--text);
 }
 
 .theme {
   text-transform: uppercase;
   letter-spacing: 2.5px;
   font-weight: 700;
+  color: var(--text);
 }
 
 .input__box {
@@ -74,7 +96,8 @@ body {
   box-shadow: 0px 16px 30px -10px rgba(70, 96, 187, 0.2);
   font-family: inherit;
   line-height: inherit;
-  color: #4b6a9b;
+  color: var(--text);
+  background-color: var(--section);
 }
 
 .input__icon {
@@ -98,7 +121,7 @@ body {
   font-weight: 700;
   border-radius: 1rem;
   border: none;
-  background: #0079ff;
+  background: var(--button);
 }
 
 .user__section {
@@ -108,8 +131,8 @@ body {
 
   padding: 3.3rem 2.4rem 4.8rem 2.4rem;
   border-radius: 1.5rem;
-  background-color: #fefefe;
   box-shadow: 0px 16px 30px -10px rgba(70, 96, 187, 0.2);
+  background-color: var(--section);
 }
 
 .user__details {
@@ -123,7 +146,6 @@ body {
 .user__avatar {
   height: 7rem;
   width: 7rem;
-  background-color: #4b9b84;
   border-radius: 7rem;
   text-align: center;
 }
@@ -133,7 +155,7 @@ body {
 }
 
 .user__name {
-  color: #2b3442;
+  color: var(--primary);
   font-size: 1.6rem;
   font-weight: 700;
 }
@@ -142,19 +164,17 @@ body {
   color: #0079ff;
 }
 
-.user__joined {
-}
-
 .user__text {
   grid-column: 1 / -1;
 }
 
 .follow__section {
   display: flex;
-  background-color: #f6f8ff;
   justify-content: space-around;
   border-radius: 1rem;
   padding: 1.8rem;
+  background-color: var(--background);
+  color: var(--text);
 }
 
 .follow__box {
@@ -170,12 +190,12 @@ body {
 .follow__number {
   font-size: 1.6rem;
   font-weight: 700;
-  color: #2b3442;
+  color: var(--primary);
 }
 
 .socials__section {
   display: grid;
-  row-gap: 1.7rem;
+  gap: 1.9rem;
 }
 
 .socials__box {
@@ -206,6 +226,10 @@ body {
   .wrapper {
     width: 76.8rem;
     padding: 14rem 9.8rem 23rem 9.7rem;
+  }
+
+  :is(.theme_icon) svg {
+    fill: var(--text);
   }
 
   .input__box {
@@ -300,6 +324,27 @@ body {
   }
 }
 
+/******************* Loader *******************/
+.loader {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #0079ff;
+  border-radius: 50%;
+  width: 5rem;
+  height: 5rem;
+  animation: spin 2s linear infinite;
+  margin: 0 auto;
+  margin-top: 3rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 /**************************************/
 /******************* DESKTOP *******************/
 /**************************************/
@@ -321,10 +366,10 @@ body {
   }
 
   :is(.theme_icon) svg {
-    fill: #697c9a;
+    fill: var(--text);
   }
 
-  .theme__box:hover {
+  .theme__box:hover p {
     color: #222731;
   }
 
