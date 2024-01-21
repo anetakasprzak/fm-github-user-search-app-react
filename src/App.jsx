@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function App() {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
@@ -8,29 +8,29 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  useEffect(
-    function () {
-      async function fetchUser() {
-        try {
-          setError(false);
-          setIsLoading(true);
-          const res = await fetch(`https://api.github.com/users/${query}`);
-          const data = await res.json();
-          setUser(data);
-        } catch (err) {
-          setError(err.message);
-        } finally {
-          setIsLoading(false);
-        }
-      }
+  async function fetchUser() {
+    try {
+      setError(false);
+      setIsLoading(true);
+      const res = await fetch(`https://api.github.com/users/${query}`);
+      const data = await res.json();
+      setUser(data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
-      if (query.length < 3) {
-        return;
-      }
-      fetchUser();
-    },
-    [query]
-  );
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (query.length < 3) {
+      return;
+    }
+
+    fetchUser();
+  };
 
   function formatDate(dateFromApi) {
     const date = new Date(dateFromApi);
@@ -72,14 +72,16 @@ export default function App() {
 
       <section className="input__box">
         <img className="input__icon" src="../public/assets/icon-search.svg" />
-        <input
-          className="input__search"
-          type="text"
-          placeholder="Search GitHub username..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <button className="input__btn">Search</button>
+        <form onSubmit={handleSubmit}>
+          <input
+            className="input__search"
+            type="text"
+            placeholder="Search GitHub username..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <button className="input__btn">Search</button>
+        </form>
       </section>
       {!user && <p>Start searching user</p>}
       {isLoading && <Loader />}
