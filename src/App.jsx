@@ -71,7 +71,7 @@ export default function App() {
       </div>
 
       <section className="input__box">
-        <img className="input__icon" src="../public/assets/icon-search.svg" />
+        <img className="input__icon" src="./assets/icon-search.svg" />
         <form onSubmit={handleSubmit}>
           <input
             className="input__search"
