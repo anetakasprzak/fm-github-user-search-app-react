@@ -126,7 +126,7 @@ export default function App() {
             <div className="socials__box">
               <img
                 className="socials__icon"
-                src="../public/assets/icon-location.svg"
+                src="./assets/icon-location.svg"
                 alt="icon"
               />
               {!user.location ? (
@@ -139,7 +139,7 @@ export default function App() {
             <div className="socials__box">
               <img
                 className="socials__icon"
-                src="../public/assets/icon-website.svg"
+                src="./assets/icon-website.svg"
                 alt="icon"
               />
               {!user.blog ? (
@@ -152,7 +152,7 @@ export default function App() {
             <div className="socials__box link--twitter">
               <img
                 className="socials__icon"
-                src="../public/assets/icon-twitter.svg"
+                src="./assets/icon-twitter.svg"
                 alt="icon"
               />
               {!user.twitter_username ? (
@@ -167,7 +167,7 @@ export default function App() {
             <div className="socials__box">
               <img
                 className="socials__icon"
-                src="../public/assets/icon-company.svg"
+                src="./assets/icon-company.svg"
                 alt="icon"
               />
               {!user.company ? (
