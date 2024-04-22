@@ -49,6 +49,7 @@ body {
   padding: 3.3rem 2.4rem 4.7rem 2.4rem;
   background-color: var(--background);
   color: var(--text);
+  height: 100vh;
 }
 
 .logo__box {
